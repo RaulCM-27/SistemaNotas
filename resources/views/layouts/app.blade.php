@@ -15,11 +15,14 @@
 
     <!-- Estilos personalizados -->
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
-    
-    <!-- DataTables -->
+
+    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <!-- DataTables JS -->
     <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
 </head>
 
 <body>
@@ -79,7 +82,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="{{ route('estudiantes.index') }}">
                         <i class="bi bi-person-lines-fill me-2"></i>
                         <span>Estudiantes</span>
                     </a>
@@ -94,15 +97,15 @@
         </nav>
     </div>
 
-    <div class="container py-4">
+    <main id="main">
         @yield('content')
-    </div>
+    </main>
 
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Script personalizados -->
     <script src="{{ asset('js/script.js') }}"></script>
-    
+
     @yield('scripts')
 
 </body>

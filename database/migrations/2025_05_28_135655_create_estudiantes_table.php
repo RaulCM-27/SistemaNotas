@@ -12,13 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('estudiantes', function (Blueprint $table) {
-            $table->string('idEstu', 12);
-            $table->string('nombreEstu', 50);
-            $table->string('apellidoEstu', 50);
-            $table->string('nombreAcu', 50);
-            $table->string('apellidoAcu', 50);
-            $table->string('telefono', 10);
-            $table->primary('idEstu');
+            $table->integer('estudiante_id')->primary(); // Clave primaria
+            $table->string('nombre_estudiante', 100);
+            $table->integer('edad');
+            $table->string('direccion', 100);
+            $table->bigInteger('telefono');
         });
     }
 

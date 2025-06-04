@@ -8,7 +8,7 @@ class Estudiante extends Model
 {
     protected $table = 'estudiantes';
 
-    protected $primaryKey = 'idEstu';
+    protected $primaryKey = 'estudiante_id';
 
     public $incrementing = false;
     protected $keyType = 'string';
@@ -16,11 +16,15 @@ class Estudiante extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'idEstu',
-        'nombreEstu',
-        'apellidoEstu',
-        'nombreAcu',
-        'apellidoAcu',
-        'telefono'
+        'estudiante_id',
+        'nombre_estudiante',
+        'edad',
+        'direccion',
+        'cedula',
+        'telefono',
+        'correo',
+        'fecha_nac',
+        'fecha_registro',
+        'estado'
     ];
 }
