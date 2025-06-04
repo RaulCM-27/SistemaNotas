@@ -20,11 +20,7 @@ class Estudiante extends Model
         'nombre_estudiante',
         'edad',
         'direccion',
-        'cedula',
         'telefono',
-        'correo',
-        'fecha_nac',
-        'fecha_registro',
         'estado'
     ];
 }
