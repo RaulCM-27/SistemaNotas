@@ -7,7 +7,7 @@
 <div class="mb-3">
     <!-- Botón que abre el modal -->
     <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#modalCrear">
-        ➕ Agregar Grados
+        ➕ Agregar Grado
     </button>
 </div>
 
@@ -29,8 +29,8 @@
             <td>
                 <button class="btn btn-sm btn-primary editar-btn"
                     data-id="{{ $gra->id_grado }}"
-                    data-nombre="{{ $gra->nivel_grado }}"
-                    data-edad="{{ $gra->letra_grado }}"
+                    data-nivel="{{ $gra->nivel_grado }}"
+                    data-letra="{{ $gra->letra_grado }}"
                     data-bs-toggle="modal"
                     data-bs-target="#modalEditar">
 
@@ -62,41 +62,147 @@
                 <div class="modal-body">
                     @csrf
 
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="id_grado" class="form-label">
-                                <i class="fas fa-id-badge me-1"></i>ID del Grado <span class="text-danger">*</span>
-                            </label>
-                            <input type="number" name="id_gr  ado" id="id_grado" class="form-control" required placeholder="Ej: 601">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="nivel_grado" class="form-label">
-                                <i class="fas fa-sort-numeric-up-alt me-1"></i>Nivel del Grado <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" name="nivel_grado" id="nivel_grado" class="form-control" maxlength="3" required placeholder="Ej: 6, 10, 11">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="letra_grado" class="form-label">
-                                <i class="fas fa-font me-1"></i>Letra del Grado <span class="text-danger">*</span>
-                            </label>
-                            <input type="text" name="letra_grado" id="letra_grado" class="form-control" maxlength="1" required placeholder="Ej: A, B, C">
+                    <!-- ID Grado -->
+                    <div class="mb-3">
+                        <label for="id_grado" class="form-label">
+                            <i class="fas fa-hashtag me-1"></i>ID Grado <span class="text-danger">*</span>
+                        </label>
+                        <input type="text"
+                            class="form-control"
+                            id="id_grado"
+                            name="id_grado"
+                            maxlength="20"
+                            required
+                            placeholder="Ej: 101">
+                        <div class="invalid-feedback">
+                            Por favor ingrese un ID válido.
                         </div>
                     </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            <i class="fas fa-times me-1"></i>Cancelar
-                        </button>
-                        <button type="submit" class="btn btn-primary">
-                            <i class="fas fa-save me-1"></i>Guardar Asignatura
-                        </button>
+                    <!-- Nivel Grado -->
+                    <div class="mb-3">
+                        <label for="nivel_grado" class="form-label">
+                            <i class="fas fa-layer-group me-1"></i>Nivel de Grado <span class="text-danger">*</span>
+                        </label>
+                        <input type="text"
+                            class="form-control"
+                            id="nivel_grado"
+                            name="nivel_grado"
+                            maxlength="3"
+                            required
+                            placeholder="Ej: 6, 7, 8 ...">
+                        <div class="invalid-feedback">
+                            Este campo es obligatorio.
+                        </div>
                     </div>
+
+                    <!-- Letra Grado -->
+                    <div class="mb-3">
+                        <label for="letra_grado" class="form-label">
+                            <i class="fas fa-font me-1"></i>Letra de Grado <span class="text-danger">*</span>
+                        </label>
+                        <input type="text"
+                            class="form-control"
+                            id="letra_grado"
+                            name="letra_grado"
+                            maxlength="1"
+                            required
+                            placeholder="Ej: A, B, C ...">
+                        <div class="invalid-feedback">
+                            Este campo es obligatorio.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i>Guardar Grado
+                    </button>
+                </div>
             </form>
+
         </div>
     </div>
 </div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="modalEditarLabel">
+                    <i class="fas fa-user-edit me-2"></i>Editar Grado
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <form id="formEditar" method="POST">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <!-- ID Grado (solo lectura) -->
+                    <div class="mb-3">
+                        <label for="edit_id_grado" class="form-label">
+                            <i class="fas fa-hashtag me-1"></i>ID Grado
+                        </label>
+                        <input type="text"
+                               class="form-control"
+                               id="edit_id_grado"
+                               name="id_grado"
+                               readonly>
+                    </div>
+
+                    <!-- Nivel Grado -->
+                    <div class="mb-3">
+                        <label for="edit_nivel_grado" class="form-label">
+                            <i class="fas fa-layer-group me-1"></i>Nivel de Grado <span class="text-danger">*</span>
+                        </label>
+                        <input type="text"
+                               class="form-control"
+                               id="edit_nivel_grado"
+                               name="nivel_grado"
+                               maxlength="3"
+                               required
+                               placeholder="Ej: 6, 7, 8 ...">
+                    </div>
+
+                    <!-- Letra Grado -->
+                    <div class="mb-3">
+                        <label for="edit_letra_grado" class="form-label">
+                            <i class="fas fa-font me-1"></i>Letra de Grado <span class="text-danger">*</span>
+                        </label>
+                        <input type="text"
+                               class="form-control"
+                               id="edit_letra_grado"
+                               name="letra_grado"
+                               maxlength="1"
+                               required
+                               placeholder="Ej: A, B, C ...">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        <i class="fas fa-times me-1"></i>Cancelar
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save me-1"></i>Guardar Cambios
+                    </button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<!-- Formulario oculto para eliminar -->
+<form id="formEliminar" method="POST" style="display: none;">
+    @csrf
+    @method('DELETE')
+</form>
 
 <script>
     $(document).ready(function() {
@@ -111,8 +217,19 @@
             stripeClasses: ['odd', 'even'],
         });
 
+        $('.btn-danger').click(function() {
+            if (confirm('¿Estás seguro de eliminar este grado?')) {
+                $('#formEliminar').attr('action', '/grados/' + $(this).data('id')).submit();
+            }
+        });
 
-
+        $('.editar-btn').click(function() {
+            $('#edit_id_grado').val($(this).data('id'));
+            $('#edit_nivel_grado').val($(this).data('nivel'));
+            $('#edit_letra_grado').val($(this).data('letra'));
+            $('#formEditar').attr('action', '/grados/' + $(this).data('id'));
+        });
     });
 </script>
+
 @endsection
