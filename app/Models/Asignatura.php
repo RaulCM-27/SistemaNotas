@@ -4,21 +4,20 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Profesor extends Model
+class Asignatura extends Model
 {
-    protected $table = 'profesores';
+    protected $table = 'asignaturas';
 
-    protected $primaryKey = 'profesor_id';
+    protected $primaryKey = 'id_asignatura';
 
     public $incrementing = false;
     protected $keyType = 'string';
-    
+
     public $timestamps = false;
 
     protected $fillable = [
-        'profesor_id',
-        'nombre',
-        'telefono',
-        'correo',
+        'id_asignatura',
+        'nombre_asignatura',
+        'horas_semanales',
     ];
 }
