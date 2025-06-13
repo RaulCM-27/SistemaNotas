@@ -20,4 +20,10 @@ class Asignatura extends Model
         'nombre_asignatura',
         'horas_semanales',
     ];
+
+    //Relacion con tabla intermedia
+    public function profesoresGrados()
+    {
+        return $this->hasMany(AsignaturaProfesorGrado::class, 'id_asignatura', 'id_asignatura');
+    }
 }

@@ -21,4 +21,10 @@ class Profesor extends Model
         'telefono',
         'correo',
     ];
+
+    // Relación con la tabla intermedia
+    public function asignaturasGrados()
+    {
+        return $this->hasMany(AsignaturaProfesorGrado::class, 'profesor_id', 'profesor_id');
+    }
 }

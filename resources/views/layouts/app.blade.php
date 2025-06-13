@@ -101,6 +101,12 @@
                     <span>Grados</span>
                 </a>
             </li>
+            <li>
+                <a href="{{ route('asignaciones.index') }}">
+                    <i class="bi bi-easel me-2"></i> <!-- O bi-mortarboard -->
+                    <span>Asignaciones</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </div>

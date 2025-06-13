@@ -20,4 +20,10 @@ class Grado extends Model
         'nivel_grado',
         'letra_grado',
     ];
+
+    //Relacion con tabla intermedia
+    public function profesoresAsignaturas()
+    {
+        return $this->hasMany(AsignaturaProfesorGrado::class, 'id_grado', 'id_grado');
+    }
 }

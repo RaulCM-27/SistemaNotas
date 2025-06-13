@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsignaturaProfesorGradoController;
 use App\Http\Controllers\AsignaturasController;
 use App\Http\Controllers\EstudiantesController;
 use App\Http\Controllers\GradosController;
@@ -21,5 +22,7 @@ Route::resource('estudiantes', EstudiantesController::class);
 Route::resource('profesores', ProfesoresController::class);
 Route::resource('asignaturas', AsignaturasController::class);
 Route::resource('grados', GradosController::class);
+Route::resource('asignaciones', AsignaturaProfesorGradoController::class);
+
 
 
