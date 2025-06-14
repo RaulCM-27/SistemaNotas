@@ -11,19 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('asignatura_profesor_grado', function (Blueprint $table) {
+        Schema::create('asignatura_profesor', function (Blueprint $table) {
             $table->id();
             $table->integer('profesor_id');
             $table->integer('id_asignatura');
-            $table->integer('id_grado');
 
             // Llaves foráneas correctamente enlazadas
             $table->foreign('profesor_id')->references('profesor_id')->on('profesores')->onDelete('cascade');
             $table->foreign('id_asignatura')->references('id_asignatura')->on('asignaturas')->onDelete('cascade');
-            $table->foreign('id_grado')->references('id_grado')->on('grados')->onDelete('cascade');
 
             // UNIQUE con nombre corto para evitar error 1059
-            $table->unique(['profesor_id', 'id_asignatura', 'id_grado'], 'apg_unique');
+            $table->unique(['profesor_id', 'id_asignatura'], 'apg_unique');
         });
     }
 
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('asignatura_profesor_grado');
+        Schema::dropIfExists('asignatura_profesor');
     }
 };

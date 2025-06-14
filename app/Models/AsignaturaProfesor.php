@@ -4,16 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class AsignaturaProfesorGrado extends Model
+class AsignaturaProfesor extends Model
 {
-    protected $table = 'asignatura_profesor_grado';
+    protected $table = 'asignatura_profesor';
 
     public $timestamps = false;
     
     protected $fillable = [
         'profesor_id',
         'id_asignatura',
-        'id_grado',
     ];
 
     // Relaciones
@@ -25,10 +24,5 @@ class AsignaturaProfesorGrado extends Model
     public function asignatura()
     {
         return $this->belongsTo(Asignatura::class, 'id_asignatura');
-    }
-
-    public function grado()
-    {
-        return $this->belongsTo(Grado::class, 'id_grado');
     }
 }

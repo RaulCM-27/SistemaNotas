@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Asignar Profesor - Asignatura - Grado')
+@section('title', 'Crear Asignacion')
 
 @section('content')
 <div class="mb-3">
@@ -17,7 +17,6 @@
             <th>ID</th>
             <th>Profesor</th>
             <th>Asignatura</th>
-            <th>Grado</th>
             <th>Acciones</th>
         </tr>
     </thead>
@@ -27,14 +26,12 @@
             <td>{{ $item->id }}</td>
             <td>{{ $item->profesor->nombre ?? 'N/D' }}</td>
             <td>{{ $item->asignatura->nombre_asignatura ?? 'N/D' }}</td>
-            <td>{{ $item->grado->nivel_grado }}° {{ $item->grado->letra_grado }}</td>
             <td>
                 <!-- Botón Editar -->
                 <button class="btn btn-sm btn-primary editar-btn"
                     data-id="{{ $item->id }}"
                     data-profesor="{{ $item->profesor_id }}"
                     data-asignatura="{{ $item->id_asignatura }}"
-                    data-grado="{{ $item->id_grado }}"
                     data-bs-toggle="modal"
                     data-bs-target="#modalEditar">
                     <i class="bi bi-pencil-fill"></i> Editar
@@ -55,7 +52,7 @@
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="modalCrearLabel">
-                    <i class="fas fa-user-plus me-2"></i>Asignar Profesor a Asignatura y Grado
+                    <i class="fas fa-user-plus me-2"></i>Asignar Profesor a Asignatura
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -95,22 +92,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                         @else
                         <div class="invalid-feedback">Seleccione una asignatura válida.</div>
-                        @enderror
-                    </div>
-
-                    <!-- Grado -->
-                    <div class="mb-3">
-                        <label for="id_grado" class="form-label fw-bold">🏫 Grado</label>
-                        <select name="id_grado" id="id_grado" class="form-select @error('id_grado') is-invalid @enderror" required>
-                            <option value="">Seleccione un grado</option>
-                            @foreach($grados as $grado)
-                            <option value="{{ $grado->id_grado }}">{{ $grado->nivel_grado }}° {{ $grado->letra_grado }}</option>
-                            @endforeach
-                        </select>
-                        @error('id_grado')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                        @else
-                        <div class="invalid-feedback">Seleccione un grado válido.</div>
                         @enderror
                     </div>
                 </div>
@@ -175,17 +156,6 @@
                             <option value="">Seleccione una asignatura</option>
                             @foreach($asignaturas as $asignatura)
                             <option value="{{ $asignatura->id_asignatura }}">{{ $asignatura->nombre_asignatura }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <!-- Grado -->
-                    <div class="mb-3">
-                        <label for="edit_id_grado" class="form-label fw-bold">🏫 Grado</label>
-                        <select name="id_grado" id="edit_id_grado" class="form-select" required>
-                            <option value="">Seleccione un grado</option>
-                            @foreach($grados as $grado)
-                            <option value="{{ $grado->id_grado }}">{{ $grado->nivel_grado }}° {{ $grado->letra_grado }}</option>
                             @endforeach
                         </select>
                     </div>
