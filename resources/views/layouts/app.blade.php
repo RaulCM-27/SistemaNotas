@@ -72,7 +72,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{ route('horarios.index') }}">
                     <i class="bi bi-calendar-week me-2"></i>
                     <span>Horarios</span>
                 </a>

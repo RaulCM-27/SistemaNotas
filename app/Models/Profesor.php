@@ -23,8 +23,8 @@ class Profesor extends Model
     ];
 
     // Relación con la tabla intermedia
-    public function asignaturasGrados()
+    public function asignaturas()
     {
-        return $this->hasMany(AsignaturaProfesorGrado::class, 'profesor_id', 'profesor_id');
+        return $this->hasMany(AsignaturaProfesor::class, 'profesor_id', 'profesor_id');
     }
 }

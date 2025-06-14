@@ -4,7 +4,7 @@ use App\Http\Controllers\AsignaturaProfesorController;
 use App\Http\Controllers\AsignaturasController;
 use App\Http\Controllers\EstudiantesController;
 use App\Http\Controllers\GradosController;
-use App\Http\Controllers\HorariosController;
+use App\Http\Controllers\HorarioController;
 use App\Http\Controllers\ProfesoresController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +24,8 @@ Route::resource('profesores', ProfesoresController::class);
 Route::resource('asignaturas', AsignaturasController::class);
 Route::resource('grados', GradosController::class);
 Route::resource('asignaciones', AsignaturaProfesorController::class);
+Route::resource('horarios', HorarioController::class);
+
 
 
 
