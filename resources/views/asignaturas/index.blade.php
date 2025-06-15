@@ -5,17 +5,17 @@
 @section('content')
 
 @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        ✅ {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-    </div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    ✅ {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+</div>
 @endif
 
 @if (session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        ⛔ {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-    </div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    ⛔ {{ session('error') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+</div>
 @endif
 
 <div class="mb-3">
@@ -73,8 +73,20 @@
             </div>
 
             <form id="formCrearAsignatura" method="POST" action="{{ route('asignaturas.store') }}">
+                
                 <div class="modal-body">
                     @csrf
+                
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>⛔ Se encontraron errores:</strong>
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
 
                     <!-- ID Asignatura -->
                     <div class="mb-3">
@@ -154,7 +166,8 @@
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="modalEditarLabel">
-                    <i class="fas fa-user-edit me-2"></i>Editar Asignatura</h5>
+                    <i class="fas fa-user-edit me-2"></i>Editar Asignatura
+                </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
@@ -210,12 +223,12 @@
                 </div>
             </form>
         </div>
-    </div> 
-</div>           
+    </div>
+</div>
 
 @if ($errors->any())
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         var modalCrear = new bootstrap.Modal(document.getElementById('modalCrear'));
         modalCrear.show();
     });

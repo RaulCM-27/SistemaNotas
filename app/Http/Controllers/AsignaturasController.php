@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Asignatura;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class AsignaturasController extends Controller
@@ -23,12 +24,20 @@ class AsignaturasController extends Controller
     //Guardar asignatura en la base de datos
     public function store(Request $request)
     {
+        // Mensajes personalizados
+        $messages = [
+            'id_asignatura.unique' => '⚠️ El código de asignatura ya existe.',
+            'id_asignatura.required' => 'El código de la asignatura es obligatorio.',
+            'nombre_asignatura.required' => 'El nombre de la asignatura es obligatorio.',
+            'horas_semanales.required' => 'Debes indicar cuántas horas semanales tiene.',
+        ];
+
         // Validar los datos que vienen del formulario
         $request->validate([
             'id_asignatura' => 'required|string|unique:asignaturas,id_asignatura',
             'nombre_asignatura' => 'required|string|max:100',
             'horas_semanales' => 'required|integer|min:1',
-        ]);
+        ], $messages); // 👈 aquí usas los mensajes personalizados
 
         // Crear la nueva asignatura
         Asignatura::create($request->all());
@@ -69,10 +78,20 @@ class AsignaturasController extends Controller
     //Eliminar un estudiante
     public function destroy(string $id)
     {
-        
-    $asignatura = Asignatura::findOrFail($id);
-    $asignatura->delete();
+        try {
+            $asignatura = Asignatura::findOrFail($id);
+            $asignatura->delete();
 
-    return redirect()->route('asignaturas.index')->with('success', 'Asignatura eliminada correctamente.');
+            return redirect()
+                ->route('asignaturas.index')
+                ->with('success', 'Asignatura eliminada correctamente.');
+        } catch (QueryException $e) {
+            if (isset($e->errorInfo[1]) && $e->errorInfo[1] == 1451) {
+                return redirect()
+                    ->route('asignaturas.index')
+                    ->with('error', 'No se puede eliminar esta asignatura porque está siendo utilizada en asignaciones o horarios.');
+            }
+            throw $e;
+        }
     }
 }

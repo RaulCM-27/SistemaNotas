@@ -6,6 +6,7 @@ use App\Models\Asignatura;
 use App\Models\AsignaturaProfesor;
 use App\Models\Grado;
 use App\Models\Horario;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class HorarioController extends Controller
@@ -16,7 +17,7 @@ class HorarioController extends Controller
         // Carga los horarios con las relaciones
         $horarios = Horario::with(['grado', 'asignacion.profesor', 'asignacion.asignatura'])->get();
         $grados = Grado::all();
-        $asignaturas = Asignatura::all(); 
+        $asignaturas = Asignatura::all();
 
         $asignaciones = \App\Models\AsignaturaProfesor::with(['profesor', 'asignatura'])->get();
 
@@ -121,9 +122,22 @@ class HorarioController extends Controller
 
     public function destroy(string $id)
     {
-        $horario = Horario::findOrFail($id);
-        $horario->delete();
+        try {
+            $horario = Horario::findOrFail($id);
+            $horario->delete();
 
-        return redirect()->route('horarios.index')->with('success', 'Horario eliminado correctamente');
+            return redirect()
+                ->route('horarios.index')
+                ->with('success', 'Horario eliminado correctamente.');
+        } catch (QueryException $e) {
+            // 1451 = Integrity constraint violation (FK fails)
+            if (isset($e->errorInfo[1]) && $e->errorInfo[1] == 1451) {
+                return redirect()
+                    ->route('horarios.index')
+                    ->with('error', 'No se puede eliminar este horario porque está siendo utilizado en otra relación.');
+            }
+            // Si es otro tipo de error, relanzarlo
+            throw $e;
+        }
     }
 }

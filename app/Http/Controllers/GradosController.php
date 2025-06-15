@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Grado;
+use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 class GradosController extends Controller
@@ -24,15 +25,19 @@ class GradosController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id_grado' => 'required|string|unique:grados,id_grado',
-            'nivel_grado' => 'required|string|max:3',
-            'letra_grado' => 'required|string|max:1',
+            'id_grado'     => 'required|string|unique:grados,id_grado',
+            'nivel_grado'  => 'required|string|max:3',
+            'letra_grado'  => 'required|string|max:1',
+        ], [
+            'id_grado.unique'   => '⛔ Ya existe un grado con este ID.',
         ]);
 
         Grado::create($request->all());
 
-        return redirect()->route('grados.index')->with('success', 'Grado creado correctamente.');
+        return redirect()->route('grados.index')
+            ->with('success', 'Grado creado correctamente.');
     }
+
 
     //Mostrar los detalles de la asignatura
     public function show(string $id)
@@ -49,7 +54,7 @@ class GradosController extends Controller
     }
 
     //Actualizar un grado existente
-    public function update(Request $request,string $id)
+    public function update(Request $request, string $id)
     {
         $request->validate([
             'nivel_grado' => 'required|string|max:3',
@@ -65,9 +70,22 @@ class GradosController extends Controller
     //Eliminar un grado
     public function destroy(string $id)
     {
-        $grado = Grado::findOrFail($id);
-        $grado->delete();
+        try {
+            $grado = Grado::findOrFail($id);
+            $grado->delete();
 
-        return redirect()->route('grados.index')->with('success', 'Grado eliminado correctamente.');
+            return redirect()
+                ->route('grados.index')
+                ->with('success', 'Grado eliminado correctamente.');
+        } catch (QueryException $e) {
+            // Código 1451: no se puede eliminar por restricción de FK
+            if (isset($e->errorInfo[1]) && $e->errorInfo[1] == 1451) {
+                return redirect()
+                    ->route('grados.index')
+                    ->with('error', 'No se puede eliminar este grado porque está siendo utilizado en horarios u otras relaciones.');
+            }
+            // Si es otro error, relanzarlo
+            throw $e;
+        }
     }
 }

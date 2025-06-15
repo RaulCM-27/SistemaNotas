@@ -74,8 +74,18 @@
 
             <form id="formCrearGrado" method="POST" action="{{ route('grados.store') }}">
                 <div class="modal-body">
-                    @csrf
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>⛔ Se encontraron errores:</strong>
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
 
+                    @csrf
                     <!-- ID Grado -->
                     <div class="mb-3">
                         <label for="id_grado" class="form-label">
@@ -217,6 +227,15 @@
     @csrf
     @method('DELETE')
 </form>
+
+@if ($errors->any())
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var modalCrear = new bootstrap.Modal(document.getElementById('modalCrear'));
+        modalCrear.show();
+    });
+</script>
+@endif
 
 <script>
     $(document).ready(function() {

@@ -88,9 +88,13 @@ class AsignaturaProfesorController extends Controller
 
     public function destroy(string $id)
     {
-        $asignacion = AsignaturaProfesor::findOrFail($id);
-        $asignacion->delete();
+        try {
+            $asignacion = AsignaturaProfesor::findOrFail($id);
+            $asignacion->delete();
 
-        return redirect()->back()->with('success', 'Asignación eliminada correctamente.');
+            return redirect()->back()->with('success', 'Asignación eliminada correctamente.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->back()->with('error', '⚠️ No se puede eliminar la asignación porque está siendo utilizada en otros registros.');
+        }
     }
 }

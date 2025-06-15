@@ -22,13 +22,18 @@ class ProfesoresController extends Controller
             'nombre' => 'required|string|max:100',
             'telefono' => 'required|digits_between:7,20',
             'correo' => 'required|email|max:100',
+        ], [
+            // Mensajes personalizados
+            'profesor_id.required' => '⛔ El campo ID del profesor es obligatorio.',
+            'profesor_id.unique' => '⛔ El ID del profesor ya está registrado.',
         ]);
 
         Profesor::create($request->all());
 
         return redirect()->route('profesores.index')
-                         ->with('success', 'Profesor registrado correctamente.');
+            ->with('success', 'Profesor registrado correctamente.');
     }
+
 
     // Mostrar un profesor (opcional)
     public function show($id)
@@ -57,7 +62,7 @@ class ProfesoresController extends Controller
         $profesor->update($request->all());
 
         return redirect()->route('profesores.index')
-                         ->with('success', 'Profesor actualizado correctamente.');
+            ->with('success', 'Profesor actualizado correctamente.');
     }
 
     // Eliminar profesor
@@ -67,6 +72,6 @@ class ProfesoresController extends Controller
         $profesor->delete();
 
         return redirect()->route('profesores.index')
-                         ->with('success', 'Profesor eliminado correctamente.');
+            ->with('success', 'Profesor eliminado correctamente.');
     }
 }

@@ -69,7 +69,7 @@
         <div class="modal-content">
             <div class="modal-header bg-primary text-white">
                 <h5 class="modal-title" id="modalCrearLabel">
-                    <i class="fas fa-user-plus me-2"></i>Nuevo Estudiante
+                    <i class="fas fa-user-plus me-2"></i>Nuevo Profesor
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -78,6 +78,17 @@
             <form id="formCrearProfesor" method="POST" action="{{ route('profesores.store') }}">
                 @csrf
                 <div class="modal-body">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>⛔ Se encontraron errores:</strong>
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
                     <!-- Fila 1: ID y Nombre -->
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -241,6 +252,15 @@
         </div>
     </div>
 </div>
+
+@if ($errors->any())
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var modalCrear = new bootstrap.Modal(document.getElementById('modalCrear'));
+        modalCrear.show();
+    });
+</script>
+@endif
 
 <script>
     $(document).ready(function() {

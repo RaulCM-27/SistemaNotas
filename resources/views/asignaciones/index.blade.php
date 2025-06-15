@@ -77,6 +77,17 @@
                 @csrf
 
                 <div class="modal-body">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>⛔ Se encontraron errores:</strong>
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
 
                     <!-- Profesor -->
                     <div class="mb-3">

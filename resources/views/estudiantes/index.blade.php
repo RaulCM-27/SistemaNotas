@@ -93,8 +93,18 @@
 
             <form id="formCrearEstudiante" method="POST" action="{{ route('estudiantes.store') }}">
                 <div class="modal-body">
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <strong>⛔ Se encontraron errores:</strong>
+                        <ul class="mb-0">
+                            @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    
                     @csrf
-
                     <div class="row">
                         <!-- ID Estudiante -->
                         <div class="col-md-6 mb-3">
