@@ -108,7 +108,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('matriculas.index') }}">
+                    <a href="#">
                         <i class="bi bi-card-checklist me-2"></i>
                         <span>Matrículas</span>
                     </a>
