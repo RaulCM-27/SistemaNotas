@@ -63,54 +63,59 @@
     </header>
 
     <div class="sidebar" id="sidebar">
-    <nav>
-        <ul>
-            <li>
-                <a href="#">
-                    <i class="bi bi-house-door me-2"></i>
-                    <span>Inicio</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('horarios.index') }}">
-                    <i class="bi bi-calendar-week me-2"></i>
-                    <span>Horarios</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('asignaturas.index') }}">
-                    <i class="bi bi-journal-text me-2"></i>
-                    <span>Asignaturas</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('estudiantes.index') }}">
-                    <i class="bi bi-person-lines-fill me-2"></i>
-                    <span>Estudiantes</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('profesores.index') }}">
-                    <i class="bi bi-person-badge me-2"></i>
-                    <span>Profesores</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('grados.index') }}">
-                    <i class="bi bi-easel me-2"></i> <!-- O bi-mortarboard -->
-                    <span>Grados</span>
-                </a>
-            </li>
-            <li>
-                <a href="{{ route('asignaciones.index') }}">
-                    <i class="bi bi-easel me-2"></i> <!-- O bi-mortarboard -->
-                    <span>Asignaciones</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
-</div>
-
+        <nav>
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="bi bi-house-door me-2"></i>
+                        <span>Inicio</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('horarios.index') }}">
+                        <i class="bi bi-calendar-week me-2"></i>
+                        <span>Horarios</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('asignaturas.index') }}">
+                        <i class="bi bi-book me-2"></i>
+                        <span>Asignaturas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('estudiantes.index') }}">
+                        <i class="bi bi-people me-2"></i>
+                        <span>Estudiantes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('profesores.index') }}">
+                        <i class="bi bi-person-workspace me-2"></i>
+                        <span>Profesores</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('grados.index') }}">
+                        <i class="bi bi-mortarboard me-2"></i>
+                        <span>Grados</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('asignaciones.index') }}">
+                        <i class="bi bi-clipboard-check me-2"></i>
+                        <span>Asignaciones</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('matriculas.index') }}">
+                        <i class="bi bi-card-checklist me-2"></i>
+                        <span>Matrículas</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
     <main id="main">
         @yield('content')

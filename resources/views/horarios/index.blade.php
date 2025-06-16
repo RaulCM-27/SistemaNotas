@@ -5,17 +5,17 @@
 @section('content')
 
 @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        ✅ {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-    </div>
+<div class="alert alert-success alert-dismissible fade show" role="alert">
+    ✅ {{ session('success') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+</div>
 @endif
 
 @if (session('error'))
-    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        ⛔ {{ session('error') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
-    </div>
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    ⛔ {{ session('error') }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Cerrar"></button>
+</div>
 @endif
 
 <div class="mb-3">
@@ -71,8 +71,12 @@ $dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
                     @endphp
                     <td>
                         @if($horarioDia)
-                        <div class="fw-bold">{{ $horarioDia->asignacion->asignatura->nombre_asignatura }}</div>
-                        <div class="text-muted small">{{ $horarioDia->asignacion->profesor->nombre }}</div>
+                        <div class="fw-bold">
+                            {{ $horarioDia->asignacion->asignatura->id_asignatura }} - {{ $horarioDia->asignacion->asignatura->nombre_asignatura }}
+                        </div>
+                        <div class="text-muted small">
+                            {{ $horarioDia->asignacion->profesor->nombre }}
+                        </div>
                         @else
                         <span class="text-secondary">—</span>
                         @endif
@@ -198,7 +202,7 @@ $dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
 
 @if ($errors->any())
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         var modalCrear = new bootstrap.Modal(document.getElementById('modalCrear'));
         modalCrear.show();
     });
@@ -218,7 +222,7 @@ $dias = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes'];
             stripeClasses: ['odd', 'even'],
         });
 
-        
+
         document.getElementById('hora_inicio').addEventListener('change', updateHoraFin);
         document.getElementById('duracion').addEventListener('change', updateHoraFin);
 

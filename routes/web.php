@@ -5,7 +5,9 @@ use App\Http\Controllers\AsignaturasController;
 use App\Http\Controllers\EstudiantesController;
 use App\Http\Controllers\GradosController;
 use App\Http\Controllers\HorarioController;
+use App\Http\Controllers\MatriculaController;
 use App\Http\Controllers\ProfesoresController;
+use App\Models\Estudiante;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
